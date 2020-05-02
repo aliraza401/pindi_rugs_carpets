@@ -1,0 +1,31 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container my-5">
+
+    <div class="row">
+    {% for i in products %}
+        <div class="col-lg-4 mb-4">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ i.imageURL }}" class="card-img-top img-fluid" alt="..." style="height: 200px;">
+                <div class="card-body">
+                    <p class="card-text">{{i.name}}</p>
+
+                    <hr style="background-color: lightgrey;">
+                    <div class="">
+                        <span class="ml-auto">
+                            <a class="btn btn-outline-info rounded-0 btn-sm update-cart" data-product={{i.id}} data-action=add>Add To Cart</a>
+                            <a class="btn btn-outline-info rounded-0 btn-sm">View</a>
+                            <a class="" style="float: right; font-weight: bold;"> Rs:{{i.price|floatformat:2 }} </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

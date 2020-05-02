@@ -1,0 +1,60 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class=" shadow py-2">
+        <div class="">
+            <a href="{% url 'store:store' %}" class="btn  btn-outline-info rounded-0">Continue Shoping</a>
+        </div>
+        <br>
+        <br>
+        <div>
+            <table class="table">
+                <tr>
+                    <th>Item{{order.get_cart_items}}</th>
+                    <th>Total:{{order.get_cart_total}}</th>
+                    <th> <a href="{% url 'store:checkout' %}" class="btn  btn-success rounded-0 text-light"
+                            style="float: right;">Checkout</a> </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="shadow py-5">
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Pic</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for item in items %}
+                <tr>
+                    <th class="text-center"><img src="{{ item.product.imageURL }}" class="img-fluid"
+                            style="height: 50px; width: 50px; "></th>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.price|floatformat:2 }}</td>
+                    <td>
+                        <span>{{ item.quantity }}</span>
+                        <span>
+                            <i class="fas fa-caret-up"></i>
+
+                            <i class="fas fa-caret-down"></i>
+                        </span>
+                    </td>
+                    <td><strong>{{item.get_total}}</strong></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
