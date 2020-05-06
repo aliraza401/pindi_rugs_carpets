@@ -1,14 +1,20 @@
+console.log('hello world')
+
 var updateBtns = document.getElementsByClassName('update-cart')
 
 for (i = 0; i < updateBtns.length; i++) {
-	updateBtns[i].addEventListener('click', function(){
+	updateBtns[i].addEventListener('click', function () {
 		var productId = this.dataset.product
 		var action = this.dataset.action
-		console.log('productId:', productId)
-		console.log('action:' , action)
-		console.log('USER:', user)
-
-		
-
+		// console.log('productId:', productId)
+		// console.log('action:' , action)
+		// console.log('USER:', user)
+		if (user) {
+			console.log('not loged in')
+			alert('not loged in')
+		} else {
+			console.log('loged in')
+			alert('loged in')
+		}
 	})
 }
