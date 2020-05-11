@@ -1,0 +1,26 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row mt-5">
+    <div class="col-md-5 ">
+        <img src="{{product.imageURL}}" class="image-fluid img-thumbnail" height="400px" width="500px">
+    </div>
+    <div class="col-md-7 ">
+        <a class="btn btn-outline-info rounded-0 my-2" href="{% url 'store:store' %}">Back to Store</a>
+
+        <p class="h5 mt-3">product name:<strong> {{product.name}} </strong> </p>
+        <p class="h5 mt-3">product price per feet:<strong> {{product.price}} </strong> </p>
+        
+
+        <a class="btn btn-primary text-white add-cart update-cart" data-product={{ product.id }} data-action="add">
+            Add to cart
+        </a>
+
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock %}

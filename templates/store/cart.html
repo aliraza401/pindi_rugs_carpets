@@ -1,0 +1,78 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class=" shadow py-2">
+        <div class="">
+            <a href="{% url 'store:store' %}" class="btn ml-3 mt-3 btn-outline-info rounded-0">Continue Shoping</a>
+        </div>
+        <br>
+        <br>
+        <div>
+            <table class="table">
+                <tr>
+                    <th>Item: {{ order.get_cart_items }} </th>
+                    <th> <a href="{% url 'store:checkout' %}" class="btn  btn-success rounded-0 text-light"
+                            style="float: right;">Checkout</a> </th>
+                </tr>
+                <tr>
+                    <th>Total: {{ order.get_cart_total|floatformat:2 }} </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="shadow py-5">
+
+        {% for i in items %}
+
+        <div class="row ">
+            <div class="col-sm-3 text-center">
+                <img src="{{ i.product.imageURL }}" class="img-fluid border" height="80px" width="80px">
+            </div>
+            <div class="col-sm-9 ">
+                <div class="row">
+                    <div class="col-sm-4 "><strong>Item:</strong> {{ i.product.name }} </div>
+                    <div class="col-sm-4 "> <strong>price square_feet:</strong> {{ i.product.price }} </div>
+                    <div class="col-sm-4 ">
+                        <strong>Quantity:</strong>
+                        <span class="text-center">
+                            <a href="#" class="update-cart" style="text-decoration: none;" data-product={{i.product.id}}
+                                data-action="add">
+                                <i class="far fa-plus-square fa-1x" style="color: green;"></i>
+                            </a>
+                            <span class="" style="height: 100px; width: 100px;">{{ i.quantity }} </span>
+                            <a href="#" class="update-cart" style="text-decoration: none;" data-product={{i.product.id}}
+                                data-action="remove">
+                                <i class="far fa-minus-square fa-1x" style="color: green;"></i>
+                            </a>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <form method="POST" action="{% url 'store:addHeightWigth' i.id  %}">
+                        
+                            <label><strong>height:</strong></label>
+                            <input class="rounded-0 w-25 text-center" name='height' type="number" class="form-control" placeholder="{{ i.height }}" step="0.01">
+
+                            <label><strong>width:</strong></label>
+                            <input class="rounded-0 w-25 text-center" name='width' type="number" class="form-control" placeholder="{{ i.width }}" step="0.01">
+
+                            {% csrf_token %}
+
+                            <input type="submit" class="btn btn-primary btn-sm ml-2 rounded-0" value="Calculate"> 
+                        </form>
+                    </div>
+
+                    <div class="col-sm-4 "> <strong>Total: {{ i.get_total|floatformat:2 }} </strong> </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        {% endfor %}
+
+{% endblock %}

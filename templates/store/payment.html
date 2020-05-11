@@ -1,0 +1,84 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+
+    <div class="row ">
+        <div class="col-md-6 shadow">
+            <a class="btn btn-outline-info rounded-0" href="{% url 'store:checkout' %}">Back to Cart</a>
+            
+            <div class="row p-3">
+                <a href="{% url 'store:process_payment' %}" class="card-body mt-3 rounded text-white mr-3" style="background-color: #4e73df; width: 100px; height: 100px; font-weight: bolder; text-decoration: none;">
+                        <div class="text-white ">Easypaisa Wallet</div>
+                </a>
+    
+                <a href="{% url 'store:process_payment' %}" class="card-body bg-info mt-3 rounded text-white ml-3" style=" width: 100px; height: 100px; font-weight: bolder; text-decoration: none;">
+                        <div class="text-white ">jazzCash</div>
+                </a>
+            </div>
+
+            <div class="row p-3">
+                <a href="{% url 'store:process_payment' %}" class="card-body bg-warning mt-3 rounded text-white mr-3" style="width: 100px; height: 100px; font-weight: bolder; text-decoration: none;">
+                    <div class="text-white ">Credit/Debit Card</div>
+                </a>
+    
+                <div  class="card-body bg-secondary mt-3 rounded text-white disabled ml-3" 
+                style=" width: 100px; height: 100px; font-weight: bolder; text-decoration: none;"
+                data-container="body" data-toggle="popover" data-placement="right" title="Sorry" data-content=" we currently don't support COD, team is working on it">
+                    <div class="text-white" >Cash on Delivery</div>
+                </div>
+            </div>
+            
+        </div>
+
+        <br>
+        <div class="col-md-6  shadow ">
+
+            <h4>Order Summary</h4>
+
+            <hr>
+            <br>
+
+            <div class="row ">
+                <div class="col-sm-6 text-center h3 ">
+                    Cart Total:
+                </div>
+                <div class="col-sm-6">
+                    <strong class="btn btn-block rounded-0 btn-outline-primary disabled" style="font-weight: bolder;">
+                        {{ order.get_cart_total|floatformat:2 }}
+                    </strong>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-sm-6 text-center h3 ">
+                    Shipping:
+                </div>
+                <div class="col-sm-6">
+                    <strong class="btn btn-block rounded-0 btn-outline-primary disabled" style="font-weight: bolder;">
+                        500
+                    </strong>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-sm-6 text-center h3 ">
+                    Total:
+                </div>
+                <div class="col-sm-6">
+                    <strong class="btn btn-block rounded-0 btn-outline-primary disabled" style="font-weight: bolder;">
+                        {{ order.get_cart_total| add:500| floatformat:2 }}
+                    </strong>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    document.getElementById('cart-icon').style.visibility = 'hidden';
+</script>
+{% endblock %}

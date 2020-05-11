@@ -1,0 +1,92 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+    <form class="form-signin" method="POST">
+        <div class="text-center mb-4">
+            <img class="mb-4 rounded-circle border border-info" src="{% static 'img/lock.jpg' %}" alt="" width="72"
+                height="72">
+            <a href="/" style="text-decoration: none;">
+                <h1 class="h3 mb-3 font-weight-normal">
+                    <span class=""
+                        style="color: rgb(6, 46, 6); font-family: 'Anton', cursive; font-weight: bolder;">IGL</span>
+                    <span class="" style="color: rgb(37, 185, 37); font-family: 'Do Hyeon', sans-serif; ">Carpets</span>
+                </h1>
+            </a>
+            <p>
+                Please enter your username and password for login.
+            </p>
+        </div>
+
+        <div class="form-label-group">
+            <input type="email" class="form-control" placeholder="email" name='email' required autofocus>
+            <label>Enter email</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="password" class="form-control" placeholder="Password" name='password' required>
+            <label for="inputPassword">Password</label>
+        </div>
+
+        <input type="hidden" name="csrfmiddlewaretoken"
+            value="ackYDNErpmKYoNTabMurICvurdoLAsglsFHhx4sPDwJYanSBHdr6ZYLho0RdJZSV">
+        {% csrf_token %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+
+        <div class="text-danger text-center mt-2">
+            {% if messages %}
+            <span class="messages">
+                {% for message in messages %}
+                <span {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</span>
+                {% endfor %}
+            </span>
+            {% endif %}
+        </div>
+
+        <div class="mt-4">
+            <div class="d-flex justify-content-center links">
+                Dont have account? <a href="{% url 'store:register' %}" class="ml-2">Sign Up</a>
+            </div>
+        </div>
+
+        <p class="mt-5 mb-3 text-muted text-center">Copyright &copy; IGL Carpets 2020 </p>
+    </form>
+
+</body>
+
+</html>
