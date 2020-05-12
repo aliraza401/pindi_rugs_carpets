@@ -1,0 +1,76 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+
+    <div class="row ">
+        <div class="col-md-6 shadow">
+            <form>
+                <!-- user info -->
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <input type="email" class="form-control" placeholder="Email">
+                    </div>
+                </div>
+                <hr>
+                <!-- Shipping Address -->
+                <h4 class="py-3">Shipping Information</h4>
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <input type="text" class="form-control" placeholder="Address">
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <input type="email" class="form-control" placeholder="City">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <input type="text" class="form-control" placeholder="State">
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <input type="email" class="form-control" placeholder="Zip code">
+                    </div>
+                </div>
+                <hr>
+                {% csrf_token %}
+                <a class="btn btn-block btn-success rounded-0 text-center text-white my-3">Continue</a>
+            </form>
+        </div>
+        <div class="col-md-6  shadow ">
+            <a class="btn btn-outline-info rounded-0" href="{% url 'store:cart' %}">Back to Cart</a>
+
+            <hr>
+
+            <h4>Order Summary</h4>
+
+            <hr>
+
+            {% for item in items %}
+            <div class="row mb-3">
+                <div class="col-md-3 text-center">
+                    <img src="{{ item.product.imageURL }}" class="img-fluid img-thumbnail"
+                        style="height: 70px; width: 70px;">
+                </div>
+                <div class="col-md-3">
+                    <p> {{item.product.name}} </p>
+                </div>
+                <div class="col-md-3">
+                    <p> {{ item.product.price }} </p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ item.quantity }}</p>
+                </div>
+            </div>
+
+            {% endfor %}
+
+            <h5>Items: <strong>{{order.get_cart_items}}</strong> </h5>
+            <h5>Total: <strong>{{order.get_cart_total}}</strong> </h5>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

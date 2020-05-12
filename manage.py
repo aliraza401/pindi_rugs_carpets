@@ -5,7 +5,11 @@ import sys
 
 
 def main():
+<<<<<<< HEAD
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'igl_carpets.settings')
+=======
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pindi_rugs.settings')
+>>>>>>> 5656c02d5a4ca530af0a18ce5ae52133deb031d8
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

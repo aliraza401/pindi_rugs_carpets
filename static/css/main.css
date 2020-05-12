@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @media only screen and (max-width: 480px) {
     #remove_small {
         max-width: 0px;
@@ -5,3 +6,6 @@
     }
     
 }
+=======
+body {}
+>>>>>>> 5656c02d5a4ca530af0a18ce5ae52133deb031d8

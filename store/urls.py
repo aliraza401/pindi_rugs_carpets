@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 from django.urls import path, include
 from . import views
+=======
+from django.urls import path
+from .import views
+>>>>>>> 5656c02d5a4ca530af0a18ce5ae52133deb031d8
 
 app_name = 'store'
 
 urlpatterns = [
+<<<<<<< HEAD
     path('', views.store, name='store'),
     path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
@@ -24,3 +30,13 @@ urlpatterns = [
     path('change_user_address/', views.change_user_address,
          name='change_user_address'),
 ]
+=======
+    path('',views.store,name='store'),
+    path('cart/',views.cart,name='cart'),
+    path('checkout/',views.checkout,name='checkout'),
+
+    path('updateItem/',views.updateItem,name='update_item'),
+ 
+]
+
+>>>>>>> 5656c02d5a4ca530af0a18ce5ae52133deb031d8

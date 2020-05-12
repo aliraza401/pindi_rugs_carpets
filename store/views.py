@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
@@ -78,11 +79,42 @@ def checkout(request):
         'items': items,
         'cart_items': cart_items,
 
+=======
+from django.shortcuts import render
+from .models import Product, Order
+from django.http import JsonResponse
+import json
+
+# Create your views here.
+
+def store(request):
+    products = Product.objects.all()
+    template = 'store/store.html'
+    context = {'products':products}
+
+    return render(request, template, context)
+
+
+def cart(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create( customer=customer, complete=False )
+        items = order.orderitem_set.all()
+    else:
+        items = []
+        order = {'get_cart_items':0,'get_cart_total':0}
+
+    template = 'store/cart.html'
+    context = {
+        'items':items,
+        'order':order,
+>>>>>>> 5656c02d5a4ca530af0a18ce5ae52133deb031d8
     }
 
     return render(request, template, context)
 
 
+<<<<<<< HEAD
 @login_required(login_url='store:login')
 def payment_view(request):
     order, created = Order.objects.get_or_create(
@@ -136,16 +168,35 @@ def register_view(request):
     context = {
         'form1': form1,
         'form2': form2,
+=======
+def checkout (request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create( customer=customer, complete=False )
+        items = order.orderitem_set.all()
+    else:
+        items = []
+        order = {'get_cart_items':0,'get_cart_total':0}
+
+    template = 'store/checkout.html'
+    context = {
+        'items':items,
+        'order':order,
+>>>>>>> 5656c02d5a4ca530af0a18ce5ae52133deb031d8
     }
 
     return render(request, template, context)
 
 
+<<<<<<< HEAD
 @login_required(login_url='store:login')
+=======
+>>>>>>> 5656c02d5a4ca530af0a18ce5ae52133deb031d8
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
+<<<<<<< HEAD
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(
         customer=request.user.customer, complete=False)
@@ -239,3 +290,23 @@ def processPayment(request):
     order.save()
 
     return redirect('store:store')
+=======
+
+    customer = request.user.customer
+    product = Product.objects.get( id=productId )
+
+    order, created = Order.objects.get_or_create( customer=customer, complete=False )
+    orderItem, created = orderItem.objects.get_or_create(order=order, product=product)
+
+    if action == 'add':
+        orderItem.quantity = orderItem.quantity + 1
+    elif action == 'remove':
+        orderItem.quantity = orderItem.quantity - 1
+
+    orderItem.save()
+
+    if orderItem.quantity <= 0:
+        orderItem.delete() 
+
+    return JsonResponse('Item was added successfully', safe=False)
+>>>>>>> 5656c02d5a4ca530af0a18ce5ae52133deb031d8
